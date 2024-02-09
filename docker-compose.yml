@@ -1,0 +1,27 @@
+services:
+  trino:
+    build: trino/
+    environment:
+      - STORAGE_ACCOUNT_NAME=${STORAGE_ACCOUNT_NAME}
+      - STORAGE_ACCOUNT_KEY=${STORAGE_ACCOUNT_KEY}
+      - HIVE_URL=thrift://hive-metastore:9083
+    depends_on: 
+      - hive-metastore
+    ports:
+      - 8080:8080
+    networks:
+      - trino_hive_net
+      
+  hive-metastore:
+    build: hive/
+    environment:
+      - STORAGE_ACCOUNT_NAME=${STORAGE_ACCOUNT_NAME}
+      - STORAGE_ACCOUNT_KEY=${STORAGE_ACCOUNT_KEY}
+    ports:
+      - 9083:9083
+    networks:
+      - trino_hive_net
+
+networks:
+  trino_hive_net:
+    driver: bridge

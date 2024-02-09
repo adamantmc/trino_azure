@@ -1,0 +1,6 @@
+<configuration>
+  <property>
+    <name>fs.azure.account.key.storage_account_name.dfs.core.windows.net</name>
+    <value>storage_account_key</value>
+  </property>
+</configuration>
